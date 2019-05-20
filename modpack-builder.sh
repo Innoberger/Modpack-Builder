@@ -1,18 +1,18 @@
 #!/bin/bash
 
-# Title:			Build script for Minecraft Forge modpacks
-# Author:			Fynn Arnold
-# License:			MIT License
-#					(https://opensource.org/licenses/MIT)
-# Version:			0.0.1
-# Last modified:	20.05.2019
+# Title:	 Build script for Minecraft Forge modpacks
+# Author:	 Fynn Arnold
+# License:	 MIT License
+#		 (https://opensource.org/licenses/MIT)
+# Version:	 0.0.1
+# Last modified: 20.05.2019
 
-# Dependencies:		- cURL (https://curl.haxx.se/)
-#					- jq (https://stedolan.github.io/jq/)
+# Dependencies:	 - cURL (https://curl.haxx.se/)
+#		 - jq (https://stedolan.github.io/jq/)
 
 # Usage:	bash modpack-builder.sh [BUILD_FILE] [OUT_DIR] [client/server/all]
 # Example:	bash modpack-builder-sh pack.json ./ all
-#			==> will build client and server archives in current directory from the pack.json buildfile
+#		==> will build client and server archives in current directory from the pack.json buildfile
 
 
 
@@ -83,7 +83,6 @@ MC_VERSION=$(echo "${BUILD_DATA}" | jq -r '.minecraft_verion')
 echo "Trying to build modpack ${MODPACK_NAME} v${MODPACK_VERSION} for Minecraft ${MC_VERSION} now ..."
 
 
-#################### do this at the end of the script !!!! ######################
 # check if ${FORGE_DIR}, ${CLIENT_ONLY} or ${UNIVERSAL} directories existing
 if [ -d "${FORGE_DIR}" ] || [ -d "${CLIENT_ONLY}" ] || [ -d "${SERVER_ONLY}" ] || [ -d "${UNIVERSAL}" ]
 then
@@ -93,7 +92,6 @@ then
 	rm -rf "${SERVER_ONLY}"
 	rm -rf "${UNIVERSAL}"
 fi
-#################### do this at the end of the script !!!! ######################
 
 
 # creating ${FORGEDIR}, ${CLIENT_ONLY} and ${UNIVERSAL}
