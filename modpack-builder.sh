@@ -4,19 +4,20 @@
 # Author:	 Fynn Arnold
 # License:	 MIT License
 #		 (https://opensource.org/licenses/MIT)
-# Version:	 0.0.2
-# Last modified: 20.05.2019
+# Version:	 0.0.3
+# Last modified: 24.05.2019
 
-# Dependencies:	 - Wget (https://www.gnu.org/software/wget/)
+# Dependencies:	 - wget (https://www.gnu.org/software/wget/)
 #		 - jq (https://stedolan.github.io/jq/)
+#		 - java (e.g. https://openjdk.java.net/)
 
 # Usage:	bash modpack-builder.sh [BUILD_FILE] [OUT_DIR] [client/server/all]
-# Example:	bash modpack-builder-sh pack.json ./ all
+# Example:	bash modpack-builder.sh pack.json ./ all
 #		==> will build client and server archives in current directory from the pack.json buildfile
 
 
 
-VERSION="0.0.2"
+VERSION="0.0.3"
 echo "Hello world! This is modpack builder v${VERSION}"
 
 # check for syntax errors
@@ -30,7 +31,7 @@ fi
 
 
 BUILD_FILE="${1}"
-OUT_DIR="${2}"
+OUT_DIR=$(realpath "${2}")
 ARCHIVES="${3}"
 
 
@@ -81,16 +82,14 @@ BUILD_DIR="${OUT_DIR}/build"
 # general settings
 MODPACK_NAME=$(echo "${BUILD_DATA}" | jq -r '.modpack.name')
 MODPACK_VERSION=$(echo "${BUILD_DATA}" | jq -r '.modpack.version')
-MC_VERSION=$(echo "${BUILD_DATA}" | jq -r '.minecraft.version')
-MC_SERVER_URL=$(echo "${BUILD_DATA}" | jq -r '.minecraft.server_url')
+MC_VERSION=$(echo "${BUILD_DATA}" | jq -r '.minecraft_version')
 echo "Trying to build modpack ${MODPACK_NAME} v${MODPACK_VERSION} for Minecraft ${MC_VERSION} now ..."
 
 
-# check if ${MC_DIR}, ${FORGE_DIR}, ${CLIENT_ONLY}, ${UNIVERSAL} or ${BUILD_DIR} directories existing
-if [ -d "${MC_DIR}" ] | [ -d "${FORGE_DIR}" ] || [ -d "${CLIENT_ONLY}" ] || [ -d "${SERVER_ONLY}" ] || [ -d "${UNIVERSAL}" ] || [ -d "${BUILD_DIR}" ]
+# check if temporary download directories existing
+if [ -d "${FORGE_DIR}" ] || [ -d "${CLIENT_ONLY}" ] || [ -d "${SERVER_ONLY}" ] || [ -d "${UNIVERSAL}" ] || [ -d "${BUILD_DIR}" ]
 then
-	echo "Found existing ${MC_DIR}, ${FORGE_DIR}, ${CLIENT_ONLY}, ${SERVER_ONLY}, ${UNIVERSAL} or ${BUILD_DIR}. Removing them now."
-	rm -rf "${MC_DIR}"
+	echo "Found existing temporary download directories. Removing them now."
 	rm -rf "${FORGE_DIR}"
 	rm -rf "${CLIENT_ONLY}"
 	rm -rf "${SERVER_ONLY}"
@@ -99,9 +98,8 @@ then
 fi
 
 
-# creating ${MC_DIR}, ${FORGEDIR}, ${CLIENT_ONLY}, ${UNIVERSAL} and ${BUILD_DIR}
-echo "Creating ${MC_DIR}, ${FORGE_DIR}, ${CLIENT_ONLY}, ${SERVER_ONLY}, ${UNIVERSAL} and ${BUILD_DIR}."
-mkdir -p "${MC_DIR}"
+# creating ${FORGEDIR}, ${CLIENT_ONLY}, ${UNIVERSAL} and ${BUILD_DIR}
+echo "Creating temporary download directories."
 mkdir -p "${FORGE_DIR}"
 mkdir -p "${CLIENT_ONLY}"
 mkdir -p "${SERVER_ONLY}"
@@ -109,34 +107,38 @@ mkdir -p "${UNIVERSAL}"
 mkdir -p "${BUILD_DIR}"
 
 
+# forge stuff
+FORGE_BUILD=$(echo "${BUILD_DATA}" | jq -r '.forge.build')
+FORGE_UNIVERSAL_URL=$(echo "${BUILD_DATA}" | jq -r '.forge.universal_url')
+FORGE_INSTALLER_URL=$(echo "${BUILD_DATA}" | jq -r '.forge.installer_url')
+FORGE_NAME_UNIVERSAL="forge-universal.jar"
+FORGE_NAME_INSTALLER="forge-installer.jar"
+
+if [ "${ARCHIVES}" == "all" ] || [ "${ARCHIVES}" == "client" ]
+then
+	echo "Downloading forge-universal build ${FORGE_BUILD} ..."
+
+	if ! wget -q -O "${FORGE_DIR}/${FORGE_NAME_UNIVERSAL}" "${FORGE_UNIVERSAL_URL}"
+	then
+		echo "Failed to download forge-universal from ${FORGE_UNIVERSAL_URL}. Aborting."
+		exit 1
+	fi
+
+	echo "Successfully downloaded forge-universal"
+fi
+
 if [ "${ARCHIVES}" == "all" ] || [ "${ARCHIVES}" == "server" ]
 then
-	echo "Downloading minecraft server version ${MC_VERSION} into ${MC_DIR} ..."
+	echo "Downloading forge-installer build ${FORGE_BUILD} ..."
 
-	if ! wget -q -O "${MC_DIR}/server.jar" "${MC_SERVER_URL}"
+	if ! wget -q -O "${FORGE_DIR}/${FORGE_NAME_INSTALLER}" "${FORGE_INSTALLER_URL}"
 	then
-        	echo "Failed to download minecraft server from ${MC_SERVER_URL}. Aborting."
+        	echo "Failed to download forge-installer from ${FORGE_UNIVERSAL_URL}. Aborting."
         	exit 1
 	fi
 
-	echo "Successfully downloaded minecraft server"
+	echo "Successfully downloaded forge-installer"
 fi
-
-
-# forge stuff
-FORGE_BUILD=$(echo "${BUILD_DATA}" | jq -r '.forge.build')
-FORGE_URL=$(echo "${BUILD_DATA}" | jq -r '.forge.url')
-FORGE_NAME="forge-${FORGE_BUILD// /}.jar"
-
-echo "Downloading forge build ${FORGE_BUILD} into ${FORGE_DIR} ..."
-
-if ! wget -q -O "${FORGE_DIR}/${FORGE_NAME}" "${FORGE_URL}"
-then
-	echo "Failed to download forge from ${FORGE_URL}. Aborting."
-	exit 1
-fi
-
-echo "Successfully downloaded forge"
 
 
 # mods stuff
@@ -176,7 +178,7 @@ do
 
 	DL_DIR="${OUT_DIR}/${MOD_DEVICE}/${MOD_DIR}"
 	mkdir -p "${DL_DIR}"
-	echo "Downloading ${MOD_NAME} build ${MOD_BUILD} into ${DL_DIR}/ ..."
+	echo "Downloading ${MOD_NAME} build ${MOD_BUILD} ..."
 
 	# abort if download failed
 	if ! wget -q -O "${DL_DIR}/${MOD_NAME// /}-${MOD_BUILD// /}.jar" "${MOD_URL}"
@@ -196,32 +198,53 @@ ARCHIVE_NAME="${MODPACK_NAME// /}-${MODPACK_VERSION// /}_mc${MC_VERSION// /}"
 
 if [ "${ARCHIVES}" == "all" ] || [ "${ARCHIVES}" == "client" ]
 then
-	echo "Packing client build into ${BUILD_DIR}/${ARCHIVE_NAME}_client.jar ..."
+	echo "Packing modpack client into ${BUILD_DIR}/${ARCHIVE_NAME}_client.tar.gz ..."
 	mkdir -p "${BUILD_DIR}/client/bin"
 
 	cp -a "${UNIVERSAL}/." "${BUILD_DIR}/client"
 	cp -a "${CLIENT_ONLY}/." "${BUILD_DIR}/client"
-	cp "${FORGE_DIR}/${FORGE_NAME}" "${BUILD_DIR}/client/bin/modpack.jar"
+	cp "${FORGE_DIR}/${FORGE_NAME_UNIVERSAL}" "${BUILD_DIR}/client/bin/modpack.jar"
 
-	echo "Successfully packed client build"
+	cd "${BUILD_DIR}/client"
+	tar czf "${BUILD_DIR}/${ARCHIVE_NAME}_client.tar.gz" *
+	rm -rf "${BUILD_DIR}/client"
+
+	echo "Successfully packed modpack client"
 fi
 
 if [ "${ARCHIVES}" == "all" ] || [ "${ARCHIVES}" == "server" ]
 then
-	echo "Packing server build into ${BUILD_DIR}/${ARCHIVE_NAME}_server.jar ..."
-	mkdir -p "${BUILD_DIR}/server"
+	echo "Packing modpack server into ${BUILD_DIR}/${ARCHIVE_NAME}_server.tar.gz ..."
 
 	cp -a "${UNIVERSAL}/." "${BUILD_DIR}/server"
 	cp -a "${SERVER_ONLY}/." "${BUILD_DIR}/server"
-	cp "${MC_DIR}/server.jar" "${BUILD_DIR}/server"
+	cp "${FORGE_DIR}/${FORGE_NAME_INSTALLER}" "${BUILD_DIR}/server"
 
-	JAVA_CMD="java -Xmx4G -Xms1G -jar server.jar nogui"
+	cd "${BUILD_DIR}/server"
+
+	if ! java -jar "${BUILD_DIR}/server/${FORGE_NAME_INSTALLER}" --installServer > /dev/null
+	then
+		echo "Error installing modpack server. Aborting."
+		exit 1
+	fi
+
+	rm -rf "${BUILD_DIR}/server"/forge-*.jar
+	rm -rf "${BUILD_DIR}/server"/forge-*.log
+
+	JAVA_CMD="java -Xmx4G -Xms1G -jar minecraft_server.${MC_VERSION}.jar nogui"
 	echo "${JAVA_CMD}" >> "${BUILD_DIR}/server/launch.sh"
 	echo "${JAVA_CMD}" >> "${BUILD_DIR}/server/launch.bat"
+
+	cd "${BUILD_DIR}"
+        tar czf "${BUILD_DIR}/${ARCHIVE_NAME}_server.tar.gz" server/
+        rm -rf "${BUILD_DIR}/server"
+
+	echo "Successfully packed modpack server"
 fi
 
+
+# cleaning up
 echo "Removing temporary download directories ..."
-rm -rf "${MC_DIR}"
 rm -rf "${FORGE_DIR}"
 rm -rf "${CLIENT_ONLY}"
 rm -rf "${SERVER_ONLY}"
