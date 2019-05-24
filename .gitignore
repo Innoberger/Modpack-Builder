@@ -2,4 +2,6 @@ client_only/
 server_only/
 universal/
 forge/
+mc/
+build/
 *.json
