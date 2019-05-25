@@ -4,12 +4,13 @@
 # Author:	 Fynn Arnold
 # License:	 MIT License
 #		 (https://opensource.org/licenses/MIT)
-# Version:	 0.0.3
-# Last modified: 24.05.2019
+# Version:	 0.0.4
+# Last modified: 25.05.2019
 
 # Dependencies:	 - wget (https://www.gnu.org/software/wget/)
 #		 - jq (https://stedolan.github.io/jq/)
 #		 - java (e.g. https://openjdk.java.net/)
+#		 - zip/unzip
 
 # Usage:	bash modpack-builder.sh [BUILD_FILE] [OUT_DIR] [client/server/all]
 # Example:	bash modpack-builder.sh pack.json ./ all
@@ -17,7 +18,7 @@
 
 
 
-VERSION="0.0.3"
+VERSION="0.0.4"
 echo "Hello world! This is modpack builder v${VERSION}"
 
 # check for syntax errors
@@ -109,8 +110,8 @@ mkdir -p "${BUILD_DIR}"
 
 # forge stuff
 FORGE_BUILD=$(echo "${BUILD_DATA}" | jq -r '.forge.build')
-FORGE_UNIVERSAL_URL=$(echo "${BUILD_DATA}" | jq -r '.forge.universal_url')
-FORGE_INSTALLER_URL=$(echo "${BUILD_DATA}" | jq -r '.forge.installer_url')
+FORGE_UNIVERSAL_URL=$(echo "${BUILD_DATA}" | jq -r '.forge.universal_src')
+FORGE_INSTALLER_URL=$(echo "${BUILD_DATA}" | jq -r '.forge.installer_src')
 FORGE_NAME_UNIVERSAL="forge-universal.jar"
 FORGE_NAME_INSTALLER="forge-installer.jar"
 
@@ -152,7 +153,9 @@ do
 	MOD_BUILD=$(echo "${MOD}" | jq -r '.build')
 	MOD_DEVICE=$(echo "${MOD}" | jq -r '.device')
 	MOD_DIR=$(echo "${MOD}" | jq -r '.dir')
-	MOD_URL=$(echo "${MOD}" | jq -r '.url')
+	MOD_URL=$(echo "${MOD}" | jq -r '.src')
+	MOD_UNZIP_ACTIVE=$(echo "${MOD}" | jq -r '.unzip.active')
+	MOD_UNZIP_CONTENT=$(echo "${MOD}" | jq -r '.unzip.content')
 	MOD_ADDITIONAL_FILES=($(echo "${MOD}" | jq -r '.additional_files' | jq -r '.[]'))
 
 	# abort if ${MOD_DEVICE} is not 'client_only', 'server_only' or 'universal'
@@ -177,17 +180,34 @@ do
 	fi
 
 	DL_DIR="${OUT_DIR}/${MOD_DEVICE}/${MOD_DIR}"
+	DL_FILE="${MOD_NAME// /}-${MOD_BUILD// /}.jar"
+
 	mkdir -p "${DL_DIR}"
 	echo "Downloading ${MOD_NAME} build ${MOD_BUILD} ..."
 
 	# abort if download failed
-	if ! wget -q -O "${DL_DIR}/${MOD_NAME// /}-${MOD_BUILD// /}.jar" "${MOD_URL}"
+	if ! wget -q -O "${DL_DIR}/${DL_FILE}" "${MOD_URL}"
 	then
 		echo "Failed to download ${MOD_NAME} from ${MOD_URL}. Aborting."
 		exit 1
 	fi
 
 	echo "Successfully downloaded ${MOD_NAME}"
+
+	# unzip archive if wanted
+	if "${MOD_UNZIP_ACTIVE}"
+	then
+		echo "Unzipping ${MOD_NAME} ..."
+
+		if ! unzip -q -j "${DL_DIR}/${DL_FILE}" "${MOD_UNZIP_CONTENT}" -d "${DL_DIR}"
+		then
+			echo "Failed unzipping ${MOD_NAME}. Aborting."
+			exit 1
+		fi
+
+		rm -rf "${DL_DIR}/${DL_FILE}"
+		echo "Successfully unzipped ${MOD_NAME}"
+	fi
 
 	# TODO: additional files
 done <<< "${MOD_ARRAY}"
@@ -198,7 +218,7 @@ ARCHIVE_NAME="${MODPACK_NAME// /}-${MODPACK_VERSION// /}_mc${MC_VERSION// /}"
 
 if [ "${ARCHIVES}" == "all" ] || [ "${ARCHIVES}" == "client" ]
 then
-	echo "Packing modpack client into ${BUILD_DIR}/${ARCHIVE_NAME}_client.tar.gz ..."
+	echo "Packing modpack client into ${BUILD_DIR}/${ARCHIVE_NAME}_client.zip ..."
 	mkdir -p "${BUILD_DIR}/client/bin"
 
 	cp -a "${UNIVERSAL}/." "${BUILD_DIR}/client"
@@ -206,15 +226,20 @@ then
 	cp "${FORGE_DIR}/${FORGE_NAME_UNIVERSAL}" "${BUILD_DIR}/client/bin/modpack.jar"
 
 	cd "${BUILD_DIR}/client"
-	tar czf "${BUILD_DIR}/${ARCHIVE_NAME}_client.tar.gz" *
-	rm -rf "${BUILD_DIR}/client"
 
+	if ! zip -q -r "${BUILD_DIR}/${ARCHIVE_NAME}_client.zip" *
+	then
+		echo "Failed packing modpack client. Aborting."
+		exit 1
+	fi
+
+	rm -rf "${BUILD_DIR}/client"
 	echo "Successfully packed modpack client"
 fi
 
 if [ "${ARCHIVES}" == "all" ] || [ "${ARCHIVES}" == "server" ]
 then
-	echo "Packing modpack server into ${BUILD_DIR}/${ARCHIVE_NAME}_server.tar.gz ..."
+	echo "Packing modpack server into ${BUILD_DIR}/${ARCHIVE_NAME}_server.zip ..."
 
 	cp -a "${UNIVERSAL}/." "${BUILD_DIR}/server"
 	cp -a "${SERVER_ONLY}/." "${BUILD_DIR}/server"
@@ -236,9 +261,14 @@ then
 	echo "${JAVA_CMD}" >> "${BUILD_DIR}/server/launch.bat"
 
 	cd "${BUILD_DIR}"
-        tar czf "${BUILD_DIR}/${ARCHIVE_NAME}_server.tar.gz" server/
-        rm -rf "${BUILD_DIR}/server"
 
+	if ! zip -q -r "${BUILD_DIR}/${ARCHIVE_NAME}_server.zip" server/
+	then
+                echo "Failed packing modpack server. Aborting."
+                exit 1
+        fi
+
+        rm -rf "${BUILD_DIR}/server"
 	echo "Successfully packed modpack server"
 fi
 
