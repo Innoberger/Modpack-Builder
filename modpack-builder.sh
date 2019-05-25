@@ -4,7 +4,7 @@
 # Author:	 Fynn Arnold
 # License:	 MIT License
 #		 (https://github.com/Innoberger/Modpack-Builder/blob/master/LICENSE)
-# Version:	 1.0.0
+# Version:	 1.0.1
 # Last modified: 25.05.2019
 
 # Dependencies:	 - wget (https://www.gnu.org/software/wget/)
@@ -18,7 +18,7 @@
 
 
 
-VERSION="1.0.0"
+VERSION="1.0.1"
 echo "Hello world! This is modpack builder v${VERSION}"
 
 # check for syntax errors
@@ -158,6 +158,7 @@ then
 fi
 
 MOD_AMOUNT=$(echo "${MOD_ARRAY}" | wc -l)
+MOD_INDEX=0
 echo "Found ${MOD_AMOUNT} mods in this modpack"
 
 while read -r MOD
@@ -171,24 +172,27 @@ do
 	MOD_UNZIP_CONTENT=$(echo "${MOD}" | jq -r '.unzip.content')
 	MOD_ADDF_ARRAY=$(echo "${MOD}" | jq -c '.additional_files | .[]')
 
+	MOD_INDEX=$((MOD_INDEX + 1))
+	MOD_PREFIX="[${MOD_INDEX}/${MOD_AMOUNT}]"
+
 	# abort if ${MOD_DEVICE} is not 'client_only', 'server_only' or 'universal'
 	if [ "${MOD_DEVICE}" != "client_only" ] && [ "${MOD_DEVICE}" != "server_only" ] && [ "${MOD_DEVICE}" != "universal" ]
 	then
-		echo "Failed proceeding ${MOD_NAME} build ${MOD_BUILD} : 'device' may only be set to 'client_only', 'server_only', 'universal'. Aborting."
+		echo "${MOD_PREFIX} Failed proceeding ${MOD_NAME} build ${MOD_BUILD} : 'device' may only be set to 'client_only', 'server_only', 'universal'. Aborting."
 		exit 1
 	fi
 
 	# skip this mod if build is for server_only and mod is client_only
 	if [ "${ARCHIVES}" == "server" ] && [ "${MOD_DEVICE}" == "client_only" ]
 	then
-		echo "Skipping ${MOD_NAME} build ${MOD_BUILD} : Mod is set to client_only, but this script was run with server param"
+		echo "${MOD_PREFIX} Skipping ${MOD_NAME} build ${MOD_BUILD} : Mod is set to client_only, but this script was run with server param"
 		continue
 	fi
 
 	# skip this mod if build is for client_only and mod is server_only
 	if [ "${ARCHIVES}" == "client" ] && [ "${MOD_DEVICE}" == "server_only" ]
 	then
-		echo "Skipping ${MOD_NAME} build ${MOD_BUILD} : Mod is set to server_only, but this script was run with client param"
+		echo "${MOD_PREFIX} Skipping ${MOD_NAME} build ${MOD_BUILD} : Mod is set to server_only, but this script was run with client param"
 		continue
 	fi
 
@@ -196,30 +200,30 @@ do
 	DL_FILE="${MOD_NAME// /}-${MOD_BUILD// /}.jar"
 
 	mkdir -p "${DL_DIR}"
-	echo "Downloading ${MOD_NAME} build ${MOD_BUILD} ..."
+	echo "${MOD_PREFIX} Downloading ${MOD_NAME} build ${MOD_BUILD} ..."
 
 	# abort if download failed
 	if ! wget --content-disposition -q -O "${DL_DIR}/${DL_FILE}" "${MOD_URL}"
 	then
-		echo "Failed to download ${MOD_NAME} from ${MOD_URL}. Aborting."
+		echo "${MOD_PREFIX} Failed to download ${MOD_NAME} from ${MOD_URL}. Aborting."
 		exit 1
 	fi
 
-	echo "Successfully downloaded ${MOD_NAME}"
+	echo "${MOD_PREFIX} Successfully downloaded ${MOD_NAME}"
 
 	# unzip archive if wanted
 	if "${MOD_UNZIP_ACTIVE}"
 	then
-		echo "Unzipping ${MOD_NAME} ..."
+		echo "${MOD_PREFIX} Unzipping ${MOD_NAME} ..."
 
 		if ! unzip -q -j "${DL_DIR}/${DL_FILE}" "${MOD_UNZIP_CONTENT}" -d "${DL_DIR}"
 		then
-			echo "Failed unzipping ${MOD_NAME}. Aborting."
+			echo "${MOD_PREFIX} Failed unzipping ${MOD_NAME}. Aborting."
 			exit 1
 		fi
 
 		rm -rf "${DL_DIR}/${DL_FILE}"
-		echo "Successfully unzipped ${MOD_NAME}"
+		echo "${MOD_PREFIX} Successfully unzipped ${MOD_NAME}"
 	fi
 
 	# additional files
@@ -229,7 +233,8 @@ do
 	fi
 
 	ADDF_AMOUNT=$(echo "${MOD_ADDF_ARRAY}" | wc -l)
-	echo "Found ${ADDF_AMOUNT} additional files for ${MOD_NAME}"
+	ADDF_INDEX=0
+	echo "${MOD_PREFIX} Found ${ADDF_AMOUNT} additional files for ${MOD_NAME}"
 
 	while read -r ADDF
 	do
@@ -241,17 +246,20 @@ do
 		ADDF_DL_DIR="${OUT_DIR}/${MOD_DEVICE}/${ADDF_DIR}"
 		ADDF_DL_FILE="${ADDF_NAME// /}-${ADDF_BUILD// /}.${ADDF_TYPE}"
 
+		ADDF_INDEX=$((ADDF_INDEX + 1))
+		ADDF_PREFIX="[${MOD_INDEX}: ${ADDF_INDEX}/${ADDF_AMOUNT}]"
+
 		mkdir -p "${ADDF_DL_DIR}"
-		echo "Downloading ${ADDF_NAME} build ${ADDF_BUILD} ..."
+		echo "${ADDF_PREFIX} Downloading ${ADDF_NAME} build ${ADDF_BUILD} ..."
 
         	# abort if download failed
         	if ! wget --content-disposition -q -O "${ADDF_DL_DIR}/${ADDF_DL_FILE}" "${ADDF_URL}"
        		then
-                	echo "Failed to download ${ADDF_NAME} from ${ADDF_URL}. Aborting."
+                	echo "${ADDF_PREFIX} Failed to download ${ADDF_NAME} from ${ADDF_URL}. Aborting."
                		exit 1
         	fi
 
-	        echo "Successfully downloaded ${ADDF_NAME}"
+	        echo "${ADDF_PREFIX} Successfully downloaded ${ADDF_NAME}"
 	done <<< "${MOD_ADDF_ARRAY}"
 done <<< "${MOD_ARRAY}"
 
@@ -296,10 +304,10 @@ then
 		exit 1
 	fi
 
-	rm -rf "${BUILD_DIR}/server"/forge-*.jar
+	rm -rf "${BUILD_DIR}/server"/forge-installer.jar
 	rm -rf "${BUILD_DIR}/server"/forge-*.log
 
-	JAVA_CMD="java -Xmx4G -Xms1G -jar minecraft_server.${MC_VERSION}.jar nogui"
+	JAVA_CMD="java -Xmx4G -Xms1G -jar forge-${FORGE_BUILD}-universal.jar nogui"
 	echo "${JAVA_CMD}" >> "${BUILD_DIR}/server/launch.sh"
 	echo "${JAVA_CMD}" >> "${BUILD_DIR}/server/launch.bat"
 
