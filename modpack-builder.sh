@@ -4,7 +4,7 @@
 # Author:	 Fynn Arnold
 # License:	 MIT License
 #		 (https://github.com/Innoberger/Modpack-Builder/blob/master/LICENSE)
-# Version:	 0.0.5
+# Version:	 1.0.0
 # Last modified: 25.05.2019
 
 # Dependencies:	 - wget (https://www.gnu.org/software/wget/)
@@ -18,7 +18,7 @@
 
 
 
-VERSION="0.0.5"
+VERSION="1.0.0"
 echo "Hello world! This is modpack builder v${VERSION}"
 
 # check for syntax errors
@@ -119,7 +119,7 @@ if [ "${ARCHIVES}" == "all" ] || [ "${ARCHIVES}" == "client" ]
 then
 	echo "Downloading forge-universal build ${FORGE_BUILD} ..."
 
-	if ! wget -q -O "${FORGE_DIR}/${FORGE_NAME_UNIVERSAL}" "${FORGE_UNIVERSAL_URL}"
+	if ! wget --content-disposition -q -O "${FORGE_DIR}/${FORGE_NAME_UNIVERSAL}" "${FORGE_UNIVERSAL_URL}"
 	then
 		echo "Failed to download forge-universal from ${FORGE_UNIVERSAL_URL}. Aborting."
 		exit 1
@@ -132,7 +132,7 @@ if [ "${ARCHIVES}" == "all" ] || [ "${ARCHIVES}" == "server" ]
 then
 	echo "Downloading forge-installer build ${FORGE_BUILD} ..."
 
-	if ! wget -q -O "${FORGE_DIR}/${FORGE_NAME_INSTALLER}" "${FORGE_INSTALLER_URL}"
+	if ! wget --content-disposition -q -O "${FORGE_DIR}/${FORGE_NAME_INSTALLER}" "${FORGE_INSTALLER_URL}"
 	then
         	echo "Failed to download forge-installer from ${FORGE_UNIVERSAL_URL}. Aborting."
         	exit 1
@@ -199,7 +199,7 @@ do
 	echo "Downloading ${MOD_NAME} build ${MOD_BUILD} ..."
 
 	# abort if download failed
-	if ! wget -q -O "${DL_DIR}/${DL_FILE}" "${MOD_URL}"
+	if ! wget --content-disposition -q -O "${DL_DIR}/${DL_FILE}" "${MOD_URL}"
 	then
 		echo "Failed to download ${MOD_NAME} from ${MOD_URL}. Aborting."
 		exit 1
@@ -245,7 +245,7 @@ do
 		echo "Downloading ${ADDF_NAME} build ${ADDF_BUILD} ..."
 
         	# abort if download failed
-        	if ! wget -q -O "${ADDF_DL_DIR}/${ADDF_DL_FILE}" "${ADDF_URL}"
+        	if ! wget --content-disposition -q -O "${ADDF_DL_DIR}/${ADDF_DL_FILE}" "${ADDF_URL}"
        		then
                 	echo "Failed to download ${ADDF_NAME} from ${ADDF_URL}. Aborting."
                		exit 1
