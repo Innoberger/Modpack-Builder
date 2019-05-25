@@ -144,6 +144,19 @@ fi
 
 # mods stuff
 MOD_ARRAY=$(echo "${BUILD_DATA}" | jq -c '.mods | .[]')
+
+# abort if no mods found
+if [ "${MOD_ARRAY}" = "" ]
+then
+	echo "No mods found for this modpack."
+	rm -rf "${FORGE_DIR}"
+	rm -rf "${CLIENT_ONLY}"
+	rm -rf "${SERVER_ONLY}"
+	rm -rf "${UNIVERSAL}"
+	rm -rf "${BUILD_DIR}"
+	exit 0
+fi
+
 MOD_AMOUNT=$(echo "${MOD_ARRAY}" | wc -l)
 echo "Found ${MOD_AMOUNT} mods in this modpack"
 
