@@ -3,8 +3,8 @@
 # Title:	 Build script for Minecraft Forge modpacks
 # Author:	 Fynn Arnold
 # License:	 MIT License
-#		 (https://opensource.org/licenses/MIT)
-# Version:	 0.0.4
+#		 (https://github.com/Innoberger/Modpack-Builder/blob/master/LICENSE)
+# Version:	 0.0.5
 # Last modified: 25.05.2019
 
 # Dependencies:	 - wget (https://www.gnu.org/software/wget/)
@@ -18,7 +18,7 @@
 
 
 
-VERSION="0.0.4"
+VERSION="0.0.5"
 echo "Hello world! This is modpack builder v${VERSION}"
 
 # check for syntax errors
@@ -156,7 +156,7 @@ do
 	MOD_URL=$(echo "${MOD}" | jq -r '.src')
 	MOD_UNZIP_ACTIVE=$(echo "${MOD}" | jq -r '.unzip.active')
 	MOD_UNZIP_CONTENT=$(echo "${MOD}" | jq -r '.unzip.content')
-	MOD_ADDITIONAL_FILES=($(echo "${MOD}" | jq -r '.additional_files' | jq -r '.[]'))
+	MOD_ADDF_ARRAY=$(echo "${MOD}" | jq -c '.additional_files | .[]')
 
 	# abort if ${MOD_DEVICE} is not 'client_only', 'server_only' or 'universal'
 	if [ "${MOD_DEVICE}" != "client_only" ] && [ "${MOD_DEVICE}" != "server_only" ] && [ "${MOD_DEVICE}" != "universal" ]
@@ -209,7 +209,37 @@ do
 		echo "Successfully unzipped ${MOD_NAME}"
 	fi
 
-	# TODO: additional files
+	# additional files
+	if [ "${MOD_ADDF_ARRAY}" = "" ]
+	then
+		continue
+	fi
+
+	ADDF_AMOUNT=$(echo "${MOD_ADDF_ARRAY}" | wc -l)
+	echo "Found ${ADDF_AMOUNT} additional files for ${MOD_NAME}"
+
+	while read -r ADDF
+	do
+		ADDF_NAME=$(echo "${ADDF}" | jq -r '.name')
+	        ADDF_BUILD=$(echo "${ADDF}" | jq -r '.build')
+		ADDF_TYPE=$(echo "${ADDF}" | jq -r '.type')
+        	ADDF_DIR=$(echo "${ADDF}" | jq -r '.dir')
+        	ADDF_URL=$(echo "${ADDF}" | jq -r '.src')
+		ADDF_DL_DIR="${OUT_DIR}/${MOD_DEVICE}/${ADDF_DIR}"
+		ADDF_DL_FILE="${ADDF_NAME// /}-${ADDF_BUILD// /}.${ADDF_TYPE}"
+
+		mkdir -p "${ADDF_DL_DIR}"
+		echo "Downloading ${ADDF_NAME} build ${ADDF_BUILD} ..."
+
+        	# abort if download failed
+        	if ! wget -q -O "${ADDF_DL_DIR}/${ADDF_DL_FILE}" "${ADDF_URL}"
+       		then
+                	echo "Failed to download ${ADDF_NAME} from ${ADDF_URL}. Aborting."
+               		exit 1
+        	fi
+
+	        echo "Successfully downloaded ${ADDF_NAME}"
+	done <<< "${MOD_ADDF_ARRAY}"
 done <<< "${MOD_ARRAY}"
 
 
