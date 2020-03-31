@@ -3,7 +3,7 @@
   "modpack":
 	{
 	  "name":"TWS-Pack",
-	  "version":"1.0.2"
+	  "version":"1.1.0"
 	},
   "forge":
 	{
@@ -17,7 +17,7 @@
       "build":"2510933",
       "device":"client_only",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/mapwriter-2/files/2510933/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/mapwriter-2/download/2510933/file",
       "unzip":
 	{
 	  "active":false,
@@ -30,7 +30,7 @@
       "build":"2568751",
       "device":"client_only",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/hwyla/files/2568751/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/hwyla/download/2568751/file",
       "unzip":
         {
           "active":false,
@@ -43,7 +43,7 @@
       "build":"2707185",
       "device":"client_only",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/wawla-what-are-we-looking-at/files/2707185/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/wawla-what-are-we-looking-at/download/2707185/file",
       "unzip":
         {
           "active":false,
@@ -56,7 +56,7 @@
       "build":"2682936",
       "device":"client_only",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/jei/files/2682936/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/jei/download/2682936/file",
       "unzip":
         {
           "active":false,
@@ -69,7 +69,7 @@
       "build":"2626087",
       "device":"client_only",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/not-enough-items-1-8/files/2626087/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/not-enough-items-1-8/download/2626087/file",
       "unzip":
         {
           "active":false,
@@ -82,7 +82,7 @@
       "build":"2262120",
       "device":"client_only",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/nei-addons/files/2262120/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/nei-addons/download/2262120/file",
       "unzip":
         {
           "active":false,
@@ -95,7 +95,7 @@
       "build":"2482481",
       "device":"client_only",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/inventory-tweaks/files/2482481/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/inventory-tweaks/download/2482481/file",
       "unzip":
         {
           "active":false,
@@ -150,7 +150,7 @@
       "build":"2684000",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/ichunutil/files/2684000/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/ichunutil/download/2684000/file",
       "unzip":
         {
           "active":false,
@@ -163,7 +163,7 @@
       "build":"2487073",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/gravity-gun/files/2487073/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/gravity-gun/download/2487073/file",
       "unzip":
         {
           "active":false,
@@ -176,7 +176,7 @@
       "build":"2684033",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/portal-gun/files/2684033/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/portal-gun/download/2684033/file",
       "unzip":
         {
           "active":false,
@@ -189,7 +189,7 @@
       "build":"2682825",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/mighty-ender-chicken/files/2682825/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/mighty-ender-chicken/download/2682825/file",
       "unzip":
         {
           "active":false,
@@ -202,7 +202,7 @@
       "build":"2713441",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/iron-chests/files/2713441/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/iron-chests/download/2713441/file",
       "unzip":
         {
           "active":false,
@@ -215,7 +215,7 @@
       "build":"2699428",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/endercore/files/2699428/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/endercore/download/2699428/file",
       "unzip":
         {
           "active":false,
@@ -228,7 +228,7 @@
       "build":"2708308",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/ender-io/files/2708308/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/ender-io/download/2708308/file",
       "unzip":
         {
           "active":false,
@@ -241,7 +241,7 @@
       "build":"2594243",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/ender-storage-1-8/files/2594243/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/ender-storage-1-8/download/2594243/file",
       "unzip":
         {
           "active":false,
@@ -254,7 +254,7 @@
       "build":"2623090",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/redstone-flux/files/2623090/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/redstone-flux/download/2623090/file",
       "unzip":
         {
           "active":false,
@@ -267,7 +267,7 @@
       "build":"2704203",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/project-intelligence/files/2704203/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/project-intelligence/download/2704203/file",
       "unzip":
         {
           "active":false,
@@ -280,7 +280,7 @@
       "build":"",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/brandons-core/files/2710581/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/brandons-core/download/2710581/file",
       "unzip":
         {
           "active":false,
@@ -293,7 +293,7 @@
       "build":"2710583",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/draconic-evolution/files/2710583/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/draconic-evolution/download/2710583/file",
       "unzip":
         {
           "active":false,
@@ -306,7 +306,7 @@
       "build":"2715198",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/numina/files/2715198/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/numina/download/2715198/file",
       "unzip":
         {
           "active":false,
@@ -319,7 +319,7 @@
       "build":"2715213",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/modular-powersuits/files/2715213/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/modular-powersuits/download/2715213/file",
       "unzip":
         {
           "active":false,
@@ -332,7 +332,7 @@
       "build":"2642375",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/ctm/files/2642375/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/ctm/download/2642375/file",
       "unzip":
         {
           "active":false,
@@ -345,7 +345,7 @@
       "build":"2619468",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/chisel/files/2619468/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/chisel/download/2619468/file",
       "unzip":
         {
           "active":false,
@@ -358,7 +358,7 @@
       "build":"2618630",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/codechicken-lib-1-8/files/2618630/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/codechicken-lib-1-8/download/2618630/file",
       "unzip":
         {
           "active":false,
@@ -371,7 +371,7 @@
       "build":"2661099",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/forge-multipart-cbe/files/2661099/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/forge-multipart-cbe/download/2661099/file",
       "unzip":
         {
           "active":false,
@@ -384,7 +384,7 @@
       "build":"2622045",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/wireless-redstone-cbe/files/2622045/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/wireless-redstone-cbe/download/2622045/file",
       "unzip":
         {
           "active":false,
@@ -397,7 +397,7 @@
       "build":"2594241",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/chicken-chunks-1-8/files/2594241/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/chicken-chunks-1-8/download/2594241/file",
       "unzip":
         {
           "active":false,
@@ -410,7 +410,7 @@
       "build":"2594249",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/translocators-1-8/files/2594249/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/translocators-1-8/download/2594249/file",
       "unzip":
         {
           "active":false,
@@ -423,7 +423,7 @@
       "build":"2715783",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/cofh-core/files/2715783/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/cofh-core/download/2715783/file",
       "unzip":
         {
           "active":false,
@@ -436,7 +436,7 @@
       "build":"2623091",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/cofh-world/files/2623091/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/cofh-world/download/2623091/file",
       "unzip":
         {
           "active":false,
@@ -449,7 +449,7 @@
       "build":"2669258",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/thermal-foundation/files/2669258/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/thermal-foundation/download/2669258/file",
       "unzip":
         {
           "active":false,
@@ -462,7 +462,7 @@
       "build":"2669259",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/thermal-innovation/files/2669259/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/thermal-innovation/download/2669259/file",
       "unzip":
         {
           "active":false,
@@ -475,7 +475,7 @@
       "build":"2715789",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/thermal-expansion/files/2715789/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/thermal-expansion/download/2715789/file",
       "unzip":
         {
           "active":false,
@@ -488,7 +488,7 @@
       "build":"2669256",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/thermal-dynamics/files/2669256/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/thermal-dynamics/download/2669256/file",
       "unzip":
         {
           "active":false,
@@ -501,7 +501,7 @@
       "build":"2669255",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/thermal-cultivation/files/2669255/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/thermal-cultivation/download/2669255/file",
       "unzip":
         {
           "active":false,
@@ -514,7 +514,7 @@
       "build":"2669254",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/redstone-arsenal/files/2669254/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/redstone-arsenal/download/2669254/file",
       "unzip":
         {
           "active":false,
@@ -527,7 +527,7 @@
       "build":"2572409",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/mrtjpcore/files/2572409/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/mrtjpcore/download/2572409/file",
       "unzip":
         {
           "active":false,
@@ -540,7 +540,7 @@
       "build":"2572423",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/project-red-base/files/2572423/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/project-red-base/download/2572423/file",
       "unzip":
         {
           "active":false,
@@ -553,7 +553,7 @@
       "build":"2572427",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/project-red-integration/files/2572427/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/project-red-integration/download/2572427/file",
       "unzip":
         {
           "active":false,
@@ -566,7 +566,7 @@
       "build":"2572426",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/project-red-lighting/files/2572426/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/project-red-lighting/download/2572426/file",
       "unzip":
         {
           "active":false,
@@ -579,7 +579,7 @@
       "build":"2572424",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/project-red-fabrication/files/2572424/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/project-red-fabrication/download/2572424/file",
       "unzip":
         {
           "active":false,
@@ -592,7 +592,7 @@
       "build":"2572422",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/project-red-mechanical/files/2572422/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/project-red-mechanical/download/2572422/file",
       "unzip":
         {
           "active":false,
@@ -605,7 +605,7 @@
       "build":"2572421",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/project-red-world/files/2572421/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/project-red-world/download/2572421/file",
       "unzip":
         {
           "active":false,
@@ -618,7 +618,7 @@
       "build":"2572420",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/project-red-compat/files/2572420/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/project-red-compat/download/2572420/file",
       "unzip":
         {
           "active":false,
@@ -631,7 +631,7 @@
       "build":"2709670",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/energy-converters/files/2709670/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/energy-converters/download/2709670/file",
       "unzip":
         {
           "active":false,
@@ -644,7 +644,7 @@
       "build":"2703036",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/cc-tweaked/files/2703036/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/cc-tweaked/download/2703036/file",
       "unzip":
         {
           "active":false,
@@ -657,7 +657,7 @@
       "build":"2702041",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/buildcraft/files/2702041/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/buildcraft/download/2702041/file",
       "unzip":
         {
           "active":false,
@@ -670,7 +670,7 @@
       "build":"2708840",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/iron-tanks/files/2708840/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/iron-tanks/download/2708840/file",
       "unzip":
         {
           "active":false,
@@ -683,7 +683,7 @@
       "build":"2640952",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/shadowfacts-forgelin/files/2640952/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/shadowfacts-forgelin/download/2640952/file",
       "unzip":
         {
           "active":false,
@@ -696,7 +696,7 @@
       "build":"2535018",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/bc-ore-processing/files/2535018/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/bc-ore-processing/download/2535018/file",
       "unzip":
         {
           "active":false,
@@ -709,7 +709,7 @@
       "build":"2652453",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/applied-energistics-2/files/2652453/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/download/2652453/file",
       "unzip":
         {
           "active":false,
@@ -722,7 +722,7 @@
       "build":"2714229",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/industrial-craft/files/2714229/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/industrial-craft/download/2714229/file",
       "unzip":
         {
           "active":false,
@@ -735,7 +735,7 @@
       "build":"2633646",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/compact-solars/files/2633646/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/compact-solars/download/2633646/file",
       "unzip":
         {
           "active":false,
@@ -748,7 +748,7 @@
       "build":"2667002",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/advanced-machines/files/2667002/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/advanced-machines/download/2667002/file",
       "unzip":
         {
           "active":false,
@@ -761,7 +761,7 @@
       "build":"2652182",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/advanced-solar-panels/files/2652182/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/advanced-solar-panels/download/2652182/file",
       "unzip":
         {
           "active":false,
@@ -774,7 +774,7 @@
       "build":"2692999",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/world-control/files/2692999/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/world-control/download/2692999/file",
       "unzip":
         {
           "active":false,
@@ -787,7 +787,7 @@
       "build":"2518667",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/baubles/files/2518667/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/baubles/download/2518667/file",
       "unzip":
         {
           "active":false,
@@ -800,7 +800,33 @@
       "build":"2629023",
       "device":"universal",
       "dir":"mods",
-      "src":"https://minecraft.curseforge.com/projects/thaumcraft/files/2629023/download",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/thaumcraft/download/2629023/file",
+      "unzip":
+        {
+          "active":false,
+          "content":""
+        },
+      "additional_files":[]
+    },
+	{
+      "name":"Industrial Foregoing",
+      "build":"2745321",
+      "device":"universal",
+      "dir":"mods",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing/download/2745321/file",
+      "unzip":
+        {
+          "active":false,
+          "content":""
+        },
+      "additional_files":[]
+    },
+    {
+      "name":"Tree Chopper",
+      "build":"2492770",
+      "device":"universal",
+      "dir":"mods",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/tree-chopper/download/2492770/file",
       "unzip":
         {
           "active":false,
@@ -810,3 +836,4 @@
     }
   ]
 }
+
