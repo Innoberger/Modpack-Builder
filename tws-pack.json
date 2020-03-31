@@ -833,6 +833,45 @@
           "content":""
         },
       "additional_files":[]
+    },
+    {
+      "name":"Tesla Core Lib",
+      "build":"2891841",
+      "device":"universal",
+      "dir":"mods",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/tesla-core-lib/download/2891841/file",
+      "unzip":
+        {
+          "active":false,
+          "content":""
+        },
+      "additional_files":[]
+    },
+    {
+      "name":"Forgelin",
+      "build":"2785465",
+      "device":"universal",
+      "dir":"mods",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/shadowfacts-forgelin/download/2785465/file",
+      "unzip":
+        {
+          "active":false,
+          "content":""
+        },
+      "additional_files":[]
+    },
+    {
+      "name":"TESLA",
+      "build":"2487959",
+      "device":"universal",
+      "dir":"mods",
+      "src":"https://www.curseforge.com/minecraft/mc-mods/tesla/download/2487959/file",
+      "unzip":
+        {
+          "active":false,
+          "content":""
+        },
+      "additional_files":[]
     }
   ]
 }
