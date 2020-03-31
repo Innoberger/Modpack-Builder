@@ -3,7 +3,7 @@
   "modpack":
 	{
 	  "name":"TWS-Pack",
-	  "version":"1.1.0-fix"
+	  "version":"1.1.1"
 	},
   "forge":
 	{
@@ -840,19 +840,6 @@
       "device":"universal",
       "dir":"mods",
       "src":"https://www.curseforge.com/minecraft/mc-mods/tesla-core-lib/download/2891841/file",
-      "unzip":
-        {
-          "active":false,
-          "content":""
-        },
-      "additional_files":[]
-    },
-    {
-      "name":"Forgelin",
-      "build":"2785465",
-      "device":"universal",
-      "dir":"mods",
-      "src":"https://www.curseforge.com/minecraft/mc-mods/shadowfacts-forgelin/download/2785465/file",
       "unzip":
         {
           "active":false,
