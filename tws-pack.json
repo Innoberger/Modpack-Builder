@@ -3,13 +3,13 @@
   "modpack":
 	{
 	  "name":"TWS-Pack",
-	  "version":"1.1.0"
+	  "version":"1.1.0-fix"
 	},
   "forge":
 	{
-	  "build":"1.12.2-14.23.5.2781",
-	  "universal_src":"https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2781/forge-1.12.2-14.23.5.2781-universal.jar",
-	  "installer_src":"https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2781/forge-1.12.2-14.23.5.2781-installer.jar"
+	  "build":"1.12.2-14.23.5.2846",
+	  "universal_src":"https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2846/forge-1.12.2-14.23.5.2846-universal.jar",
+	  "installer_src":"https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2846/forge-1.12.2-14.23.5.2846-installer.jar"
 	},
   "mods":[
     {
